@@ -66,7 +66,7 @@ ai-kube/
 
 1. **Navigate to the Ansible directory**:
    ```sh
-   cd ansible
+   cd ai-kube
    ```
 
 2. **Run the Ansible playbook**:
