@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-py
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-py
+  template:
+    metadata:
+      labels:
+        app: ai-py
+    spec:
+      containers:
+      - name: ai-py
+        image: ghcr.io/Cdaprod/ai-py:latest
+        env:
+        - name: MINIO_ENDPOINT
+          value: "ai-s3:9000"
+        - name: MINIO_BUCKET
+          value: "weaviate-data"
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-credentials
+              key: accesskey
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-credentials
+              key: secretkey
+        volumeMounts:
+        - name: nfs-storage
+          mountPath: /app/data
+      volumes:
+      - name: nfs-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+      imagePullSecrets:
+      - name: ghcr-secret

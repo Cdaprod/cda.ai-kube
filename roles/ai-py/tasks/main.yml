@@ -1,0 +1,4 @@
+# roles/ai-py/tasks/main.yml
+- name: Deploy AI Python Application
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'deployment.yml.j2') }}"

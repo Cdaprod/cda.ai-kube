@@ -1,0 +1,6 @@
+# group_vars/all.yml
+minio_access_key: "{{ lookup('env', 'MINIO_ACCESS_KEY') }}"
+minio_secret_key: "{{ lookup('env', 'MINIO_SECRET_KEY') }}"
+nfs_server: "cda_ds"
+nfs_path: "/volume1/cda-storage/minio/data"
+namespace: "cdaprod-dev"

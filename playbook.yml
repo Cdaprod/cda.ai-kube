@@ -1,0 +1,9 @@
+# playbook.yml
+- hosts: all
+  become: yes
+  roles:
+    - role: common
+    - role: ai-s3
+    - role: ai-vdb
+    - role: ai-py
+    - role: ai-frontend

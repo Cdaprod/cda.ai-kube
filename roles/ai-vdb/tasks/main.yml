@@ -1,0 +1,4 @@
+# roles/ai-vdb/tasks/main.yml
+- name: Deploy Weaviate
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'deployment.yml.j2') }}"

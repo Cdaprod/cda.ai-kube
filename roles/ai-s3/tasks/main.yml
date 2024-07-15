@@ -1,0 +1,16 @@
+# roles/ai-s3/tasks/main.yml
+- name: Create MinIO secret
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'secret.yml.j2') }}"
+    
+- name: Create NFS persistent volume
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'pv.yml.j2') }}"
+
+- name: Create NFS persistent volume claim
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'pvc.yml.j2') }}"
+
+- name: Deploy MinIO
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', 'deployment.yml.j2') }}"
